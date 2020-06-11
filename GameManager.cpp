@@ -34,8 +34,8 @@ GameManager::GameManager(HWND hWnd, int client_w, int client_h)
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
 	sd.Windowed = TRUE;
-	
-	ex <<  D3D10CreateDeviceAndSwapChain(NULL, D3D10_DRIVER_TYPE_HARDWARE, NULL, createDeviceFlags,
+
+	ex << D3D10CreateDeviceAndSwapChain(NULL, D3D10_DRIVER_TYPE_HARDWARE, NULL, createDeviceFlags,
 		D3D10_SDK_VERSION, &sd, swapchain.GetAddressOf(), device.GetAddressOf());
 
 	ID3D10Texture2D* pBackBuffer;
@@ -72,7 +72,7 @@ GameManager::GameManager(HWND hWnd, int client_w, int client_h)
 	bsd.SrcBlendAlpha = D3D10_BLEND_ZERO;
 	bsd.DestBlendAlpha = D3D10_BLEND_ZERO;
 	bsd.BlendOpAlpha = D3D10_BLEND_OP_ADD;
-	
+
 	ex << device->CreateBlendState(&bsd, blend.GetAddressOf());
 	device->OMSetBlendState(blend.Get(), nullptr, 0xffff);
 
@@ -118,8 +118,6 @@ GameManager::GameManager(HWND hWnd, int client_w, int client_h)
 		ex << device->CreatePixelShader(ps_blob->GetBufferPointer(), ps_blob->GetBufferSize(), sprite_ps.GetAddressOf());
 	}
 
-	ex << D3DX10CreateShaderResourceViewFromFileA(device.Get(), "circle512.png", nullptr, nullptr, sprite_map["circle"].GetAddressOf(), nullptr);
-	
 	ex << D3DX10CreateFontA(device.Get(), 0, 0, 0, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, FF_MODERN | DEFAULT_PITCH, "Consolas",
 		font_map["sample"].GetAddressOf());
 
@@ -133,7 +131,6 @@ GameManager::GameManager(HWND hWnd, int client_w, int client_h)
 		ex << device->CreateBuffer(&bd, nullptr, object_buffer.GetAddressOf());
 	}
 	{
-		
 		D3D10_BUFFER_DESC bd = {};
 		bd.ByteWidth = sizeof(XMFLOAT3) * rect_vertices.size();
 		bd.BindFlags = D3D10_BIND_VERTEX_BUFFER;
@@ -304,7 +301,6 @@ void GameManager::Peek(const MSG& msg) {
 	}
 }
 
-
 void GameManager::GotoLevel(string lv_name)
 {
 	if (current_level != nullptr)
@@ -320,7 +316,7 @@ void GameManager::GotoLevel(string lv_name)
 
 GameManager::~GameManager()
 {
-	for (auto pair : level_map) delete pair.second;	
+	for (auto pair : level_map) delete pair.second;
 }
 
 void GameManager::BindSprite(string name, string filename)
