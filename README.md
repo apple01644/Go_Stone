@@ -16,6 +16,9 @@ DirectX와 C++17 을 이용해서 개발했습니다.
 + F6: 스테이지 2로 이동
 + F7: 경험치 요구량 표시
 
+### 알려진 버그
+F5, F6을 번갈아서 사용하면 게임이 프리징됩니다.
+
 ### 플레이 사진
 ![alt img](pictures/mainmenu.png)
 ![alt img](pictures/stage1.png)
